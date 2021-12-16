@@ -98,7 +98,66 @@ string removeSpaces(string prgm){
     }
     return res;
 }
+string resolve_macro(string str)
+{
+    int length = str.length();
+    string result;
+    string macName;
+    bool macFound = false;
+    char macrovalue;
 
+    bool macros = false;
+    for (int i = 0; i < length; i++)
+    {
+        if(str[i] == '#' && str[i+1] == 'd')
+        {
+            macros = true;
+        }
+        if(macros && !macFound  && str[i] == ' ')
+        {
+            int temp = i+1;
+            while(str[temp]!= ' ')
+            {
+                macName+= str[temp++];
+                macFound = true;
+            }
+        }
+        if(macros && str[i] == '\n')
+        {
+            int m = i;
+
+        while(str[m]!=' '){
+            value+=str[m];
+            m--;
+        }
+
+
+        int k=0;
+        for(k =value.length() ;k>=0 ; k--){
+                newValue+=value[k];
+        }
+
+           macrovalue = str[i-1];
+            macros = false;
+
+
+
+        }
+
+        if(macFound && str[i] == macName[0] && str[i+1] == macName[1] && str[i+2] == macName[2])
+        {
+            //result+= macrovalue;
+            result+= newValue;
+
+
+            i+=2;
+            continue;
+        }
+        result+= str[i];
+    }
+
+return result;
+}
 int main()
 {
     string prgm;
@@ -110,6 +169,8 @@ int main()
     cout << new_prgm;
     cout << "\n-------------------\n";
     countVaraibles(new_prgm);
+cout<<resolve_macro(removed_Space);
+
     return 0;
 }
 
